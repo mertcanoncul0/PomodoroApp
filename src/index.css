@@ -1,0 +1,124 @@
+@layer Reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+  #root {
+    isolation: isolate;
+  }
+  button {
+    border: none;
+    background-color: transparent;
+  }
+}
+
+@layer Colors {
+  :root {
+    /* Primary Colors */
+    --color-primary-red: #f87070;
+    --color-primary-cyan: #70f3f8;
+    --color-primary-purple: #d881f8;
+    --color-primary-blue: #d7e0ff;
+
+    /* Neutral Colors */
+    --color-neutral-dark-blue: #1e213f;
+    --color-neutral-white: #ffffff;
+    --color-neutral-light-gray: #eff1fa;
+    --color-neutral-very-dark-blue: #161932;
+
+    /* Default Colors */
+    --pomodoro-button-active: var(--color-primary-red);
+  }
+
+  [data-color="red"] {
+    --pomodoro-button-active: var(--color-primary-red);
+  }
+
+  [data-color="cyan"] {
+    --pomodoro-button-active: var(--color-primary-cyan);
+  }
+
+  [data-color="purple"] {
+    --pomodoro-button-active: var(--color-primary-purple);
+  }
+}
+
+body {
+  background-color: var(--color-neutral-dark-blue);
+  color: var(--color-primary-blue);
+  font-family: "Kumbh Sans", sans-serif;
+  font-weight: bold;
+  width: 100vw;
+  height: 100vh;
+  padding: 32px 24px 48px 24px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+header h1 {
+  font-size: 24px;
+}
+
+.pomodoro-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--color-neutral-very-dark-blue);
+  border-radius: 31.5px;
+  padding: 8px 12px;
+  margin-bottom: 48px;
+}
+
+.pomodoro-tabs button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+
+  color: var(--color-primary-blue);
+  font-size: 12px;
+  font-weight: bold;
+  height: 48px;
+  padding: 18px;
+  border-radius: 26.5px;
+}
+
+.pomodoro-tabs button.active {
+  background-color: var(--pomodoro-button-active);
+  color: var(--color-neutral-dark-blue);
+}
