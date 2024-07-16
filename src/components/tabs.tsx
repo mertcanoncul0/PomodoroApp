@@ -1,13 +1,10 @@
-import { useStickyState } from "../hooks/useStickyState"
 import { useActiveTabStore } from "../store/pomodoro"
 
 export function PomodoroTabs() {
-  const [activeTab, setActiveTab] = useStickyState(0, "activeTab")
-  const { setActiveTabStore } = useActiveTabStore((state) => state) as any
+  const { activeTab, setActiveTab } = useActiveTabStore((state) => state) as any
 
   function changeActiveTab(tab: number) {
     setActiveTab(tab)
-    setActiveTabStore(tab)
   }
 
   return (

@@ -5,7 +5,7 @@ export function getActiveTabMinute(
   pomodoroTime: number,
   shortBreakTime: number,
   longBreakTime: number
-) {
+): number {
   switch (tabs[activeTab]) {
     case "pomodoro":
       return pomodoroTime * 60
@@ -13,7 +13,7 @@ export function getActiveTabMinute(
       return shortBreakTime * 60
     case "long break":
       return longBreakTime * 60
+    default:
+      return 25
   }
-
-  return 25
 }

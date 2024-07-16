@@ -1,40 +1,56 @@
 import { create } from "zustand"
+import { persist } from "zustand/middleware"
 
-export const useTimeStore = create((set) => ({
-  pomodoroTime: Number(localStorage.pomodoroTime) || 25,
-  shortBreakTime: Number(localStorage.shortBreakTime) || 5,
-  longBreakTime: Number(localStorage.longBreakTime) || 15,
+export const useTimeStore = create(
+  persist(
+    (set) => ({
+      pomodoroTime: 25,
+      shortBreakTime: 5,
+      longBreakTime: 5,
 
-  setPomodoroTime: (time: number) => {
-    localStorage.pomodoroTime = time
-    set({ pomodoroTime: time })
-  },
+      setPomodoroTime: (time: number) => {
+        set({ pomodoroTime: time })
+      },
 
-  setShortBreakTime: (time: number) => {
-    localStorage.shortBreakTime = time
-    set({ shortBreakTime: time })
-  },
+      setShortBreakTime: (time: number) => {
+        set({ shortBreakTime: time })
+      },
 
-  setLongBreakTime: (time: number) => {
-    localStorage.longBreakTime = time
-    set({ longBreakTime: time })
-  },
-}))
+      setLongBreakTime: (time: number) => {
+        set({ longBreakTime: time })
+      },
+    }),
+    {
+      name: "time-storage",
+    }
+  )
+)
 
-export const useActiveTabStore = create((set) => ({
-  activeTab: Number(localStorage.activeTab) || 0,
+export const useActiveTabStore = create(
+  persist(
+    (set) => ({
+      activeTab: 0,
 
-  setActiveTabStore: (tab: number) => {
-    localStorage.activeTab = tab
-    set({ activeTab: tab })
-  },
-}))
+      setActiveTab: (tab: number) => {
+        set({ activeTab: tab })
+      },
+    }),
+    {
+      name: "active-tab-storage",
+    }
+  )
+)
 
-export const useSoundStore = create((set) => ({
-  soundStore: localStorage.soundState || true,
-
-  setSoundStore: (sound: boolean) => {
-    localStorage.soundState = sound
-    set({ soundStore: sound })
-  },
-}))
+export const useSoundStore = create(
+  persist(
+    (set) => ({
+      sound: true,
+      setSound: (sound: boolean) => {
+        set({ soundStore: sound })
+      },
+    }),
+    {
+      name: "sound-storage",
+    }
+  )
+)
