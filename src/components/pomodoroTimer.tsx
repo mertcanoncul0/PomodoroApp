@@ -53,7 +53,7 @@ export function PomodoroTimer() {
             )
           }
         })
-      }, 1000)
+      }, 10)
     } else if (!isRunning && timerSeconds !== 0) {
       clearInterval(timer)
     }
@@ -94,7 +94,7 @@ export function PomodoroTimer() {
             style={{
               background: `conic-gradient(transparent ${
                 100 - progress
-              }%, --var(--changeable-color) ${100 - progress}%)`,
+              }%, var(--changeable-color) ${100 - progress}%)`,
             }}
           >
             <div className="timer-range-middle">
