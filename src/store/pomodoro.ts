@@ -6,7 +6,7 @@ export const useTimeStore = create(
     (set) => ({
       pomodoroTime: 25,
       shortBreakTime: 5,
-      longBreakTime: 5,
+      longBreakTime: 15,
 
       setPomodoroTime: (time: number) => {
         set({ pomodoroTime: time })
