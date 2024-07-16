@@ -9,3 +9,5 @@ export const colors: { [key: number]: string } = {
   1: "cyan",
   2: "purple",
 }
+
+export const tabs = ["pomodoro", "short break", "long break"]
