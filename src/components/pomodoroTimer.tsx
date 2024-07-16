@@ -94,7 +94,7 @@ export function PomodoroTimer() {
             style={{
               background: `conic-gradient(transparent ${
                 100 - progress
-              }%, #3498db ${100 - progress}%)`,
+              }%, --var(--changeable-color) ${100 - progress}%)`,
             }}
           >
             <div className="timer-range-middle">

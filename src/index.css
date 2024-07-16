@@ -209,7 +209,7 @@ header h1 {
   width: 248px;
   height: 248px;
   border-radius: 50%;
-  background: conic-gradient(transparent 0%, #3498db 0%);
+  background: conic-gradient(transparent 0%, var(--changeable-color) 0%);
 
   position: relative;
 }
@@ -685,5 +685,15 @@ header h1 {
 
   .settings-wrapper button {
     cursor: pointer;
+  }
+
+  .modal-content-font-item,
+  .modal-content-color-item {
+    cursor: pointer;
+  }
+
+  .modal-content-font-item:hover,
+  .modal-content-color-item:hover {
+    opacity: 0.8;
   }
 }
