@@ -696,4 +696,16 @@ header h1 {
   .modal-content-color-item:hover {
     opacity: 0.8;
   }
+
+  [data-font-family="Roboto+Slab"] {
+    .timer-range-time {
+      font-size: 120px;
+    }
+  }
+
+  [data-font-family="Space+Mono"] {
+    .timer-range-time {
+      font-size: 100px;
+    }
+  }
 }
