@@ -13,7 +13,7 @@ export function PomodoroTimer() {
   const { pomodoroTime, shortBreakTime, longBreakTime } = useTimeStore(
     (state) => state
   ) as any
-  const { sound } = useSoundStore((state) => state) as any
+  const { soundStore } = useSoundStore((state) => state) as any
   const [timerSeconds, setTimerSeconds] = useState(pomodoroTime * 60)
   const [isRunning, setIsRunning] = useState(false)
   const [progress, setProgress] = useState(100)
@@ -40,8 +40,10 @@ export function PomodoroTimer() {
           if (prevSeconds > 0) {
             return prevSeconds - 1
           } else {
-            if (sound) {
+            if (soundStore) {
               completedSound.play()
+            } else {
+              completedSound.pause()
             }
             clearInterval(timer)
             setIsRunning(false)
@@ -52,8 +54,10 @@ export function PomodoroTimer() {
 
         setProgress(() => {
           if (timerSeconds === 0) {
-            if (sound) {
+            if (soundStore) {
               completedSound.play()
+            } else {
+              completedSound.pause()
             }
             return 0
           } else {
@@ -84,8 +88,10 @@ export function PomodoroTimer() {
   }
 
   const handleStartPause = (e: any) => {
-    if (sound) {
+    if (soundStore) {
       clickSound.play()
+    } else {
+      completedSound.pause()
     }
 
     if (e.target.innerText === "RESTART") {

@@ -31,10 +31,10 @@ export const useActiveTabStore = create((set) => ({
 }))
 
 export const useSoundStore = create((set) => ({
-  sound: localStorage.sound || true,
+  soundStore: localStorage.soundState || true,
 
-  setSound: (sound: boolean) => {
-    localStorage.settings = sound
-    set({ sound })
+  setSoundStore: (sound: boolean) => {
+    localStorage.soundState = sound
+    set({ soundStore: sound })
   },
 }))

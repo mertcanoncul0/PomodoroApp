@@ -14,11 +14,15 @@ export function Settings() {
     setShortBreakTime,
     setLongBreakTime,
   } = useTimeStore((state) => state) as any
-  const { sound, setSound } = useSoundStore((state) => state) as any
+  const { setSoundStore } = useSoundStore((state) => state) as any
+  const [sound, setSound] = useStickyState(true, "soundState")
   const [timeError, setTimeError] = useState(false)
 
   function handleSound() {
-    setSound(!sound)
+    setSound((prev: boolean) => {
+      setSoundStore(!prev)
+      return !prev
+    })
   }
 
   function handleIsOpen() {
@@ -69,9 +73,9 @@ export function Settings() {
                   onClick={handleSound}
                 >
                   {sound ? (
-                    <img src="/sound-on.svg" alt="Close Modal" />
+                    <img src="/sound-on.svg" alt="sound" />
                   ) : (
-                    <img src="/sound-off.svg" alt="Close Modal" />
+                    <img src="/sound-off.svg" alt="sound" />
                   )}
                 </button>
 
