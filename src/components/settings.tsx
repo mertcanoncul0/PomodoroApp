@@ -2,6 +2,7 @@ import { useStickyState } from "../hooks/useStickyState"
 import { ModalColorPicker } from "./modalColorPicker"
 import { ModalFontPicker } from "./modalFontPicker"
 import { useSoundStore, useTimeStore } from "../store/pomodoro"
+import { useState } from "preact/hooks"
 
 export function Settings() {
   const [isOpen, setIsOpen] = useStickyState(false, "modal-state")
@@ -14,6 +15,7 @@ export function Settings() {
     setLongBreakTime,
   } = useTimeStore((state) => state) as any
   const { sound, setSound } = useSoundStore((state) => state) as any
+  const [timeError, setTimeError] = useState(false)
 
   function handleSound() {
     setSound(!sound)
@@ -24,16 +26,23 @@ export function Settings() {
   }
 
   function onSubmit(e: any) {
+    setTimeError(false)
     e.preventDefault()
 
-    const pomodoro = (document.getElementById("pomodoro") as HTMLInputElement)
-      .value
+    const pomodoro = (
+      document.querySelector("[data-pomodoroTime]") as HTMLInputElement
+    ).value
     const shortBreak = (
-      document.getElementById("short break") as HTMLInputElement
+      document.querySelector("[data-shortBreakTime]") as HTMLInputElement
     ).value
     const longBreak = (
-      document.getElementById("long break") as HTMLInputElement
+      document.querySelector("[data-longBreakTime]") as HTMLInputElement
     ).value
+
+    if (pomodoro.length > 3 || shortBreak.length > 3 || longBreak.length > 3) {
+      setTimeError(true)
+      return
+    }
 
     setPomodoroTime(Number(pomodoro))
     setShortBreakTime(Number(shortBreak))
@@ -83,7 +92,13 @@ export function Settings() {
                 <ul className="modal-content-time-list">
                   <li className="modal-content-time-item">
                     <label htmlFor="pomodoro">pomodoro</label>
-                    <input type="number" value={pomodoroTime} id="pomodoro" />
+                    <input
+                      type="number"
+                      value={pomodoroTime}
+                      aria-label="pomodoro"
+                      data-pomodoroTime
+                      required
+                    />
                   </li>
 
                   <li className="modal-content-time-item">
@@ -91,7 +106,9 @@ export function Settings() {
                     <input
                       type="number"
                       value={shortBreakTime}
-                      id="short break"
+                      aria-label="short break"
+                      data-shortBreakTime
+                      required
                     />
                   </li>
 
@@ -100,10 +117,15 @@ export function Settings() {
                     <input
                       type="number"
                       value={longBreakTime}
-                      id="long break"
+                      aria-label="long break"
+                      data-longBreakTime
+                      required
                     />
                   </li>
                 </ul>
+                {timeError && (
+                  <p className="time-error">Periods cannot exceed 3 digits</p>
+                )}
               </div>
               <div className="modal-content-font">
                 <h3 className="modal-content-title">Font</h3>

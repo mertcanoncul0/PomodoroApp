@@ -430,6 +430,13 @@ header h1 {
   }
 }
 
+.time-error {
+  color: var(--changeable-color);
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
 @media (width >= 425px) {
   body {
     padding: 0;
@@ -712,5 +719,9 @@ header h1 {
     .timer-range-time {
       font-size: 100px;
     }
+  }
+
+  .time-error {
+    font-size: 15px;
   }
 }
