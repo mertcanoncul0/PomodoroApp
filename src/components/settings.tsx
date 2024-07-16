@@ -54,7 +54,7 @@ export function Settings() {
   return (
     <div className="settings-wrapper">
       <button onClick={handleIsOpen}>
-        <img src="/settings.svg" alt="Open Settings" />
+        <img src="/settings.svg" alt="Open Settings" width={28} height={28} />
       </button>
 
       <div className={`modal-overlay ${isOpen && "open"}`}>
@@ -69,19 +69,35 @@ export function Settings() {
                   onClick={handleSound}
                 >
                   {sound ? (
-                    <img src="/sound-on.svg" alt="sound" />
+                    <img
+                      src="/sound-on.svg"
+                      alt="sound"
+                      width={20}
+                      height={20}
+                    />
                   ) : (
-                    <img src="/sound-off.svg" alt="sound" />
+                    <img
+                      src="/sound-off.svg"
+                      alt="sound"
+                      width={20}
+                      height={20}
+                    />
                   )}
                 </button>
 
                 <button
                   className="close-button"
+                  aria-label={"Close Modal"}
                   type="button"
                   style={{ marginLeft: "2rem" }}
                   onClick={handleIsOpen}
                 >
-                  <img src="/modal-close.svg" alt="Close Modal" />
+                  <img
+                    src="/modal-close.svg"
+                    alt="Close Modal Icon"
+                    width={20}
+                    height={20}
+                  />
                 </button>
               </div>
             </div>
@@ -95,7 +111,7 @@ export function Settings() {
                     <input
                       type="number"
                       value={pomodoroTime}
-                      aria-label="pomodoro"
+                      aria-label="pomodoro time in minutes"
                       id="pomodoro"
                       data-pomodoroTime
                       required
@@ -108,7 +124,7 @@ export function Settings() {
                       type="number"
                       value={shortBreakTime}
                       id="short-break"
-                      aria-label="short break"
+                      aria-label="short break time in minutes"
                       data-shortBreakTime
                       required
                     />
@@ -119,7 +135,7 @@ export function Settings() {
                     <input
                       type="number"
                       value={longBreakTime}
-                      aria-label="long break"
+                      aria-label="long break time in minutes"
                       id="long-break"
                       data-longBreakTime
                       required
