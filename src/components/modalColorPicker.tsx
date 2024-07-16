@@ -10,7 +10,7 @@ export function ModalColorPicker() {
   }
 
   useEffect(() => {
-    document.documentElement.dataset.color = colors[activeColor]
+    document.body.dataset.color = colors[activeColor]
   }, [activeColor])
 
   return (

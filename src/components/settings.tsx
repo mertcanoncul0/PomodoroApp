@@ -96,16 +96,18 @@ export function Settings() {
                       type="number"
                       value={pomodoroTime}
                       aria-label="pomodoro"
+                      id="pomodoro"
                       data-pomodoroTime
                       required
                     />
                   </li>
 
                   <li className="modal-content-time-item">
-                    <label htmlFor="short break">short break</label>
+                    <label htmlFor="short-break">short break</label>
                     <input
                       type="number"
                       value={shortBreakTime}
+                      id="short-break"
                       aria-label="short break"
                       data-shortBreakTime
                       required
@@ -113,11 +115,12 @@ export function Settings() {
                   </li>
 
                   <li className="modal-content-time-item">
-                    <label htmlFor="long break">long break</label>
+                    <label htmlFor="long-break">long break</label>
                     <input
                       type="number"
                       value={longBreakTime}
                       aria-label="long break"
+                      id="long-break"
                       data-longBreakTime
                       required
                     />

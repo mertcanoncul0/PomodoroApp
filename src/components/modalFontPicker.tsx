@@ -10,7 +10,7 @@ export function ModalFontPicker() {
   }
 
   useEffect(() => {
-    document.documentElement.dataset.fontFamily = fonts[activeFont]
+    document.body.dataset.fontFamily = fonts[activeFont]
   }, [activeFont])
 
   return (

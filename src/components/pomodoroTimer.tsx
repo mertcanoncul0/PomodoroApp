@@ -106,7 +106,7 @@ export function PomodoroTimer() {
   }
 
   return (
-    <div className="pmdo">
+    <div className="pomodoro-wrapper">
       <div className="pomodoro-timer-wrapper">
         <div className="pomodoro-timer">
           <div
