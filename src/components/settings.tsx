@@ -53,7 +53,7 @@ export function Settings() {
 
   return (
     <div className="settings-wrapper">
-      <button onClick={handleIsOpen}>
+      <button onClick={handleIsOpen} aria-label={"Open Settings Modal"}>
         <img src="/settings.svg" alt="Open Settings" width={28} height={28} />
       </button>
 
@@ -66,6 +66,7 @@ export function Settings() {
                 <button
                   className="sound-button"
                   type="button"
+                  aria-label={"Toggle Sound"}
                   onClick={handleSound}
                 >
                   {sound ? (

@@ -117,6 +117,7 @@ export function PomodoroTimer() {
         <div className="pomodoro-timer">
           <div
             className="timer-range"
+            role={"progressbar"}
             style={{
               background: `conic-gradient(transparent ${
                 100 - progress
