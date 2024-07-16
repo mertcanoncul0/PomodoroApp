@@ -46,7 +46,7 @@ export const useSoundStore = create(
     (set) => ({
       sound: true,
       setSound: (sound: boolean) => {
-        set({ soundStore: sound })
+        set({ sound })
       },
     }),
     {

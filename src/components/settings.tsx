@@ -14,12 +14,11 @@ export function Settings() {
     setShortBreakTime,
     setLongBreakTime,
   } = useTimeStore((state) => state) as any
-  const { soundStore, setSoundStore } = useSoundStore((state) => state) as any
+  const { sound, setSound } = useSoundStore((state) => state) as any
   const [timeError, setTimeError] = useState(false)
-  console.log(soundStore)
 
   function handleSound() {
-    setSoundStore(!soundStore as boolean)
+    setSound(!sound as boolean)
   }
 
   function handleIsOpen() {
@@ -69,7 +68,7 @@ export function Settings() {
                   type="button"
                   onClick={handleSound}
                 >
-                  {soundStore ? (
+                  {sound ? (
                     <img src="/sound-on.svg" alt="sound" />
                   ) : (
                     <img src="/sound-off.svg" alt="sound" />
