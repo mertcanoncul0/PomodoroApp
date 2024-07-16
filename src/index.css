@@ -307,8 +307,13 @@ header h1 {
   }
 
   & .close-button {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
+  }
+
+  & .sound-button {
+    width: 16px;
+    height: 16px;
   }
 }
 

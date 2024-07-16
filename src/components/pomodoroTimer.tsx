@@ -1,15 +1,25 @@
 import { useEffect, useState } from "preact/hooks"
-import { useActiveTabStore, useTimeStore } from "../store/pomodoro"
+import {
+  useActiveTabStore,
+  useSoundStore,
+  useTimeStore,
+} from "../store/pomodoro"
 import { getActiveTabMinute } from "../lib/helper"
+import clickAudio from "/click.mp3"
+import completedAudio from "/completed.mp3"
 
 export function PomodoroTimer() {
   const { activeTab } = useActiveTabStore((state) => state) as any
   const { pomodoroTime, shortBreakTime, longBreakTime } = useTimeStore(
     (state) => state
   ) as any
+  const { sound } = useSoundStore((state) => state) as any
   const [timerSeconds, setTimerSeconds] = useState(pomodoroTime * 60)
   const [isRunning, setIsRunning] = useState(false)
   const [progress, setProgress] = useState(100)
+
+  const clickSound = new Audio(clickAudio)
+  const completedSound = new Audio(completedAudio)
 
   useEffect(() => {
     setTimerSeconds(
@@ -30,6 +40,9 @@ export function PomodoroTimer() {
           if (prevSeconds > 0) {
             return prevSeconds - 1
           } else {
+            if (sound) {
+              completedSound.play()
+            }
             clearInterval(timer)
             setIsRunning(false)
             setProgress(100)
@@ -39,6 +52,9 @@ export function PomodoroTimer() {
 
         setProgress(() => {
           if (timerSeconds === 0) {
+            if (sound) {
+              completedSound.play()
+            }
             return 0
           } else {
             return (
@@ -49,7 +65,7 @@ export function PomodoroTimer() {
                   shortBreakTime,
                   longBreakTime
                 )) *
-              100
+              1000
             )
           }
         })
@@ -68,6 +84,10 @@ export function PomodoroTimer() {
   }
 
   const handleStartPause = (e: any) => {
+    if (sound) {
+      clickSound.play()
+    }
+
     if (e.target.innerText === "RESTART") {
       setTimerSeconds(
         getActiveTabMinute(

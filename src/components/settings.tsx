@@ -1,7 +1,7 @@
 import { useStickyState } from "../hooks/useStickyState"
 import { ModalColorPicker } from "./modalColorPicker"
 import { ModalFontPicker } from "./modalFontPicker"
-import { useTimeStore } from "../store/pomodoro"
+import { useSoundStore, useTimeStore } from "../store/pomodoro"
 
 export function Settings() {
   const [isOpen, setIsOpen] = useStickyState(false, "modal-state")
@@ -13,6 +13,11 @@ export function Settings() {
     setShortBreakTime,
     setLongBreakTime,
   } = useTimeStore((state) => state) as any
+  const { sound, setSound } = useSoundStore((state) => state) as any
+
+  function handleSound() {
+    setSound(!sound)
+  }
 
   function handleIsOpen() {
     setIsOpen(!isOpen)
@@ -48,13 +53,28 @@ export function Settings() {
           <form onSubmit={onSubmit}>
             <div className="modal-content-header">
               <h2>Settings</h2>
-              <button
-                className="close-button"
-                type="button"
-                onClick={handleIsOpen}
-              >
-                <img src="/modal-close.svg" alt="Close Modal" />
-              </button>
+              <div>
+                <button
+                  className="sound-button"
+                  type="button"
+                  onClick={handleSound}
+                >
+                  {sound ? (
+                    <img src="/sound-on.svg" alt="Close Modal" />
+                  ) : (
+                    <img src="/sound-off.svg" alt="Close Modal" />
+                  )}
+                </button>
+
+                <button
+                  className="close-button"
+                  type="button"
+                  style={{ marginLeft: "2rem" }}
+                  onClick={handleIsOpen}
+                >
+                  <img src="/modal-close.svg" alt="Close Modal" />
+                </button>
+              </div>
             </div>
 
             <div className="modal-content-middle">

@@ -29,3 +29,12 @@ export const useActiveTabStore = create((set) => ({
     set({ activeTab: tab })
   },
 }))
+
+export const useSoundStore = create((set) => ({
+  sound: localStorage.sound || true,
+
+  setSound: (sound: boolean) => {
+    localStorage.settings = sound
+    set({ sound })
+  },
+}))
