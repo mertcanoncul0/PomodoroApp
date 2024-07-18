@@ -74,7 +74,7 @@ export function PomodoroTimer() {
             )
           }
         })
-      }, 10)
+      }, 1000)
     } else if (!isRunning && timerSeconds !== 0) {
       clearInterval(timer)
     }
