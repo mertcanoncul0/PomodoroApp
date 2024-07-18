@@ -124,8 +124,10 @@ export function PomodoroTimer() {
           <div
             className='timer-range'
             role='progressbar'
-            aria-labelledby='div'
-            id='pomodoro-timer'
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={progress}
+            aria-labelledby='timer-label'
             style={{
               background: `conic-gradient(transparent ${
                 100 - progress
@@ -133,11 +135,23 @@ export function PomodoroTimer() {
             }}
           >
             <div className='timer-range-middle'>
-              <p className='timer-range-time'>{formatTimer(timerSeconds)}</p>
-
-              <p className='timer-range-state' onClick={handleStartPause}>
-                {timerSeconds === 0 ? 'Restart' : isRunning ? 'Pause' : 'Start'}
+              <p id='timer-label' className='timer-range-time'>
+                {formatTimer(timerSeconds)}
               </p>
+
+              <button
+                className='timer-range-state'
+                onClick={handleStartPause}
+                aria-label={
+                  timerSeconds === 0
+                    ? 'Restart timer'
+                    : isRunning
+                    ? 'Pause timer'
+                    : 'Start timer'
+                }
+              >
+                {timerSeconds === 0 ? 'Restart' : isRunning ? 'Pause' : 'Start'}
+              </button>
             </div>
           </div>
         </div>
