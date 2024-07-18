@@ -68,41 +68,41 @@
   }
 
   /* Fonts */
-  [data-font-family="Kumbh+Sans"] {
-    --font-family: "Kumbh Sans", sans-serif;
+  [data-font-family='Kumbh+Sans'] {
+    --font-family: 'Kumbh Sans', sans-serif;
   }
 
-  [data-font-family="Roboto+Slab"] {
-    --font-family: "Roboto Slab", sans-serif;
+  [data-font-family='Roboto+Slab'] {
+    --font-family: 'Roboto Slab', sans-serif;
     font-weight: normal;
   }
 
-  [data-font-family="Space+Mono"] {
-    --font-family: "Space Mono", sans-serif;
+  [data-font-family='Space+Mono'] {
+    --font-family: 'Space Mono', sans-serif;
   }
 
   /* Colors */
-  [data-color="red"] {
+  [data-color='red'] {
     --changeable-color: var(--color-primary-red);
   }
 
-  [data-color="cyan"] {
+  [data-color='cyan'] {
     --changeable-color: var(--color-primary-cyan);
   }
 
-  [data-color="purple"] {
+  [data-color='purple'] {
     --changeable-color: var(--color-primary-purple);
   }
 }
 
 .kumbh-sans {
-  font-family: "Kumbh Sans", sans-serif;
+  font-family: 'Kumbh Sans', sans-serif;
 }
 .roboto-slab {
-  font-family: "Roboto Slab", sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
 }
 .space-mono {
-  font-family: "Space Mono", sans-serif;
+  font-family: 'Space Mono', sans-serif;
 }
 
 .red {
@@ -152,7 +152,7 @@ header h1 {
   max-width: 327px;
 }
 
-[data-font-family="Space+Mono"] {
+[data-font-family='Space+Mono'] {
   .pomodoro-tabs button {
     padding: 12px;
   }
@@ -215,7 +215,7 @@ header h1 {
 }
 
 .timer-range::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -234,7 +234,7 @@ header h1 {
   text-align: center;
 }
 
-[data-font-family="Space+Mono"] {
+[data-font-family='Space+Mono'] {
   .timer-range-time {
     font-size: 60px;
   }
@@ -418,7 +418,7 @@ header h1 {
   border-radius: 50%;
 
   &::before {
-    content: url("/check.svg");
+    content: url('/check.svg');
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s;
@@ -711,13 +711,13 @@ header h1 {
     opacity: 0.8;
   }
 
-  [data-font-family="Roboto+Slab"] {
+  [data-font-family='Roboto+Slab'] {
     .timer-range-time {
       font-size: 120px;
     }
   }
 
-  [data-font-family="Space+Mono"] {
+  [data-font-family='Space+Mono'] {
     .timer-range-time {
       font-size: 100px;
     }

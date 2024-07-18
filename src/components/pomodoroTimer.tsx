@@ -1,12 +1,12 @@
-import { useEffect, useState } from "preact/hooks"
+import { useEffect, useState } from 'preact/hooks'
 import {
   useActiveTabStore,
   useSoundStore,
   useTimeStore,
-} from "../store/pomodoro"
-import { getActiveTabMinute } from "../lib/helper"
-import clickAudio from "/click.mp3"
-import completedAudio from "/completed.mp3"
+} from '../store/pomodoro'
+import { getActiveTabMinute } from '../lib/helper'
+import clickAudio from '/start.mp3'
+import completedAudio from '/completed.mp3'
 
 export function PomodoroTimer() {
   const { activeTab } = useActiveTabStore((state) => state) as any
@@ -19,7 +19,9 @@ export function PomodoroTimer() {
   const [progress, setProgress] = useState(100)
 
   const clickSound = new Audio(clickAudio)
-  const completedSound = new Audio(completedAudio)
+  const [completedSound, setCompletedSound] = useState(
+    new Audio(completedAudio)
+  )
 
   useEffect(() => {
     setTimerSeconds(
@@ -27,7 +29,6 @@ export function PomodoroTimer() {
     )
 
     setProgress(100)
-
     setIsRunning(false)
   }, [activeTab, pomodoroTime, shortBreakTime, longBreakTime])
 
@@ -42,8 +43,13 @@ export function PomodoroTimer() {
           } else {
             if (sound) {
               completedSound.play()
-            } else {
-              completedSound.pause()
+
+              setTimeout(() => {
+                const newCompletedSound = new Audio(completedAudio)
+                setCompletedSound(newCompletedSound)
+                completedSound.pause()
+                completedSound.currentTime = 0
+              }, 3500)
             }
             clearInterval(timer)
             setIsRunning(false)
@@ -54,11 +60,6 @@ export function PomodoroTimer() {
 
         setProgress(() => {
           if (timerSeconds === 0) {
-            if (sound) {
-              completedSound.play()
-            } else {
-              completedSound.pause()
-            }
             return 0
           } else {
             return (
@@ -73,13 +74,13 @@ export function PomodoroTimer() {
             )
           }
         })
-      }, 1000)
+      }, 10)
     } else if (!isRunning && timerSeconds !== 0) {
       clearInterval(timer)
     }
 
     return () => clearInterval(timer)
-  }, [isRunning, timerSeconds, activeTab])
+  }, [isRunning, timerSeconds, activeTab, sound, completedSound])
 
   function formatTimer(time: number) {
     const minutes = Math.floor(time / 60)
@@ -87,14 +88,19 @@ export function PomodoroTimer() {
     return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`
   }
 
-  const handleStartPause = (e: any) => {
+  function handleStartPause(e: Event) {
+    const target = e.target as HTMLParagraphElement
+
     if (sound) {
       clickSound.play()
-    } else {
-      completedSound.pause()
     }
 
-    if (e.target.innerText === "RESTART") {
+    if (target.innerText === 'RESTART') {
+      const newCompletedSound = new Audio(completedAudio)
+      setCompletedSound(newCompletedSound)
+      completedSound.pause()
+      completedSound.currentTime = 0
+
       setTimerSeconds(
         getActiveTabMinute(
           activeTab,
@@ -112,25 +118,25 @@ export function PomodoroTimer() {
   }
 
   return (
-    <div className="pomodoro-wrapper">
-      <div className="pomodoro-timer-wrapper">
-        <div className="pomodoro-timer">
+    <div className='pomodoro-wrapper'>
+      <div className='pomodoro-timer-wrapper'>
+        <div className='pomodoro-timer'>
           <div
-            className="timer-range"
-            role={"progressbar"}
-            id="pomodoro-timer"
-            aria-labelledby="labeldiv"
+            className='timer-range'
+            role={'progressbar'}
+            id='pomodoro-timer'
+            aria-labelledby='labeldiv'
             style={{
               background: `conic-gradient(transparent ${
                 100 - progress
               }%, var(--changeable-color) ${100 - progress}%)`,
             }}
           >
-            <div className="timer-range-middle">
-              <p className="timer-range-time">{formatTimer(timerSeconds)}</p>
+            <div className='timer-range-middle'>
+              <p className='timer-range-time'>{formatTimer(timerSeconds)}</p>
 
-              <p className="timer-range-state" onClick={handleStartPause}>
-                {timerSeconds === 0 ? "Restart" : isRunning ? "Pause" : "Start"}
+              <p className='timer-range-state' onClick={handleStartPause}>
+                {timerSeconds === 0 ? 'Restart' : isRunning ? 'Pause' : 'Start'}
               </p>
             </div>
           </div>
