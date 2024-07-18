@@ -124,9 +124,20 @@ export function PomodoroTimer() {
                 {formatTimer(timerSeconds)}
               </p>
 
-              <button className='timer-range-state' onClick={handleStartPause}>
+              <p
+                className='timer-range-state'
+                onClick={handleStartPause}
+                type='button'
+                aria-label={
+                  timerSeconds === 0
+                    ? 'Restart timer button'
+                    : isRunning
+                    ? 'Pause timer button'
+                    : 'Start timer button'
+                }
+              >
                 {timerSeconds === 0 ? 'Restart' : isRunning ? 'Pause' : 'Start'}
-              </button>
+              </p>
             </div>
           </div>
         </div>
