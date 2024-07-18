@@ -123,7 +123,7 @@ export function PomodoroTimer() {
         <div className='pomodoro-timer'>
           <div
             className='timer-range'
-            role='range'
+            role='slider'
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={progress}
