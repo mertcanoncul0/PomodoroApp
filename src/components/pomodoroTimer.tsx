@@ -142,6 +142,8 @@ export function PomodoroTimer() {
               <button
                 className='timer-range-state'
                 onClick={handleStartPause}
+                type='button'
+                role='button'
                 aria-label={
                   timerSeconds === 0
                     ? 'Restart timer'
