@@ -19,15 +19,12 @@ export function PomodoroTimer() {
   const [progress, setProgress] = useState(100)
 
   const clickSound = new Audio(clickAudio)
-  const [completedSound, setCompletedSound] = useState(
-    new Audio(completedAudio)
-  )
+  const completedSound = new Audio(completedAudio)
 
   useEffect(() => {
     setTimerSeconds(
       getActiveTabMinute(activeTab, pomodoroTime, shortBreakTime, longBreakTime)
     )
-
     setProgress(100)
     setIsRunning(false)
   }, [activeTab, pomodoroTime, shortBreakTime, longBreakTime])
@@ -45,8 +42,6 @@ export function PomodoroTimer() {
               completedSound.play()
 
               setTimeout(() => {
-                const newCompletedSound = new Audio(completedAudio)
-                setCompletedSound(newCompletedSound)
                 completedSound.pause()
                 completedSound.currentTime = 0
               }, 3500)
@@ -57,23 +52,6 @@ export function PomodoroTimer() {
             return 0
           }
         })
-
-        setProgress(() => {
-          if (timerSeconds === 0) {
-            return 0
-          } else {
-            return (
-              (timerSeconds /
-                getActiveTabMinute(
-                  activeTab,
-                  pomodoroTime,
-                  shortBreakTime,
-                  longBreakTime
-                )) *
-              100
-            )
-          }
-        })
       }, 1000)
     } else if (!isRunning && timerSeconds !== 0) {
       clearInterval(timer)
@@ -81,6 +59,19 @@ export function PomodoroTimer() {
 
     return () => clearInterval(timer)
   }, [isRunning, timerSeconds, activeTab, sound, completedSound])
+
+  useEffect(() => {
+    setProgress(
+      (timerSeconds /
+        getActiveTabMinute(
+          activeTab,
+          pomodoroTime,
+          shortBreakTime,
+          longBreakTime
+        )) *
+        100
+    )
+  }, [timerSeconds, activeTab, pomodoroTime, shortBreakTime, longBreakTime])
 
   function formatTimer(time: number) {
     const minutes = Math.floor(time / 60)
@@ -96,11 +87,6 @@ export function PomodoroTimer() {
     }
 
     if (target.innerText === 'RESTART') {
-      const newCompletedSound = new Audio(completedAudio)
-      setCompletedSound(newCompletedSound)
-      completedSound.pause()
-      completedSound.currentTime = 0
-
       setTimerSeconds(
         getActiveTabMinute(
           activeTab,
@@ -109,7 +95,6 @@ export function PomodoroTimer() {
           longBreakTime
         )
       )
-
       setIsRunning(true)
       return
     }
@@ -143,13 +128,12 @@ export function PomodoroTimer() {
                 className='timer-range-state'
                 onClick={handleStartPause}
                 type='button'
-                role='button'
                 aria-label={
                   timerSeconds === 0
-                    ? 'Restart timer'
+                    ? 'Restart timer button'
                     : isRunning
-                    ? 'Pause timer'
-                    : 'Start timer'
+                    ? 'Pause timer button'
+                    : 'Start timer button'
                 }
               >
                 {timerSeconds === 0 ? 'Restart' : isRunning ? 'Pause' : 'Start'}
